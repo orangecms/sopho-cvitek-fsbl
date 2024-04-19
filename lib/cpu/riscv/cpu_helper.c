@@ -10,12 +10,15 @@
 
 void sync_cache(void)
 {
+  asm volatile("sfence.vma");
+  /*
 	asm volatile(
 			"icache.iall\n"
 			"sync.i\n"
 			:
 			:
 			: "memory");
+  */
 }
 
 void cpu_report_exception(unsigned int exception_type)

@@ -57,14 +57,14 @@ void flush_dcache_range(uintptr_t start, size_t size)
 void enable_dcache(void)
 {
 	asm volatile(
-		"csrs mhcr, %0;" ::"rI"(0x2)
+		"csrs 0x7C1, %0;" ::"rI"(0x2)
 	);
 }
 
 void disable_dcache(void)
 {
 	asm volatile(
-		"csrc mhcr, %0;" ::"rI"(0x2)
+		"csrc 0x7C1, %0;" ::"rI"(0x2)
 	);
 }
 

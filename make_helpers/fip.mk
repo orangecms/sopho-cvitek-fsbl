@@ -10,6 +10,7 @@ ifeq (${BOOT_CPU},aarch64)
 MONITOR_PATH = plat/${CHIP_ARCH}/prebuilt/bl31.bin
 else ifeq (${BOOT_CPU},riscv)
 MONITOR_PATH = ../opensbi/build/platform/generic/firmware/fw_dynamic.bin
+MONITOR_PATH = nomon.bin
 endif
 
 fip%: export BLCP_IMG_RUNADDR=0x05200200
