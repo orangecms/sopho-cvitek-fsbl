@@ -54,6 +54,7 @@ void ddrc_init(void)
 	mmio_wr32(0x08004000 + 0xd4, 0x00790000);
 #endif
 	mmio_wr32(0x08004000 + 0xdc, 0x11240040);
+// direct on-die termination
 #ifdef DDR_DODT
 	mmio_wr32(0x08004000 + 0xe0, 0x04680000);
 #else

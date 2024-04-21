@@ -17,7 +17,7 @@ void ddrc_init(void)
 {
 	if (get_ddr_type() == DDR_TYPE_DDR3) {
 		NOTICE("DDR3 1866 ddrc_init\n");
-		mmio_wr32(0x08004000 + 0xc, 0x63746371);
+		mmio_wr32(0x08004000 + 0xc, 0x63746371); // ctcq
 		// PATCH0.use_blk_ext}:0:2:=0x1
 		// PATCH0.dis_auto_ref_cnt_fix:2:1:=0x0
 		// PATCH0.dis_auto_ref_algn_to_8:3:1:=0x0

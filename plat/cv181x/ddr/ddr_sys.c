@@ -133,6 +133,7 @@ void ddr_sys_resume(void)
 	//    KC_MSG("ctrl_init_detect_dram_size finish\n");
 
 	// restory dram_cap_in_mbyte
+  // NOTE: HERE WE GET THED DRAM SIZE
 	rddata = mmio_rd32(0x0208 + PHYD_BASE_ADDR);
 	dram_cap_in_mbyte = rddata;
 

@@ -11,7 +11,9 @@ int ddr_init(const struct ddr_param *ddr_param)
 
 	// read_ddr_pkg_info();
 	// bldp_init((void *)ddr_param);
-#ifndef NO_DDR_CFG
+#ifdef NO_DDR_CFG
+	NOTICE("no DDR configuration\n");
+#else
 	read_ddr_pkg_info();
 	ddr_sys_bring_up();
 #endif //NO_DDR_CFG
