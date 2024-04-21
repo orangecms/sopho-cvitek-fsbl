@@ -277,6 +277,8 @@ int load_monitor(int retry, uint64_t *monitor_entry)
 	flush_dcache_range(fip_param2.monitor_runaddr, fip_param2.monitor_size);
 	NOTICE("ME.\n");
 
+  NOTICE("YES\n");
+
 	*monitor_entry = fip_param2.monitor_runaddr;
 
 	return 0;
@@ -393,11 +395,14 @@ retry_from_flash:
 		if (load_monitor(retry, &monitor_entry) < 0)
 			continue;
 
+    /*
 		if (load_loader_2nd(retry, &loader_2nd_entry) < 0)
 			continue;
-
+    */
 		break;
 	}
+
+  NOTICE("GO ON\n");
 
 	if (retry >= p_rom_api_get_number_of_retries()) {
 		switch (p_rom_api_get_boot_src()) {
@@ -414,11 +419,13 @@ retry_from_flash:
 		}
 	}
 
+  NOTICE("GO ON\n");
 	sync_cache();
 	console_flush();
 
 	switch_rtc_mode_2nd_stage();
 
+  NOTICE("GO GO GO!\n");
 	if (monitor_entry) {
 		NOTICE("Jump to monitor at 0x%lx.\n", monitor_entry);
 		jump_to_monitor(monitor_entry, loader_2nd_entry);
