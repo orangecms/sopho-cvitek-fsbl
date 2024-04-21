@@ -3,8 +3,11 @@ ifeq ("$(wildcard $(BLCP_PATH))","")
 BLCP_PATH = test/empty.bin
 endif
 FIP_COMPRESS ?= lzma
+FIP_PATH = ${BUILD_PLAT}/fip.bin
 
 CHIP_CONF_PATH = ${BUILD_PLAT}/chip_conf.bin
+
+BL2_PATH = ${BUILD_PLAT}/bl2.bin
 
 ifeq (${BOOT_CPU},aarch64)
 MONITOR_PATH = plat/${CHIP_ARCH}/prebuilt/bl31.bin
@@ -42,25 +45,25 @@ fip-simple: fip-dep
 	$(print_target)
 	${Q}echo "  [GEN] fip.bin"
 	${Q}${FIPTOOL} -v genfip \
-		'${BUILD_PLAT}/fip.bin' \
+		'${FIP_PATH}' \
 		--CHIP_CONF='${CHIP_CONF_PATH}' \
 		--NOR_INFO='${NOR_INFO}' \
 		--NAND_INFO='${NAND_INFO}'\
-		--BL2='${BUILD_PLAT}/bl2.bin'
-	${Q}echo "  [LS] " $$(ls -l '${BUILD_PLAT}/fip.bin')
+		--BL2='${BL2_PATH}'
+	${Q}echo "  [LS] " $$(ls -l '${FIP_PATH}')
 
 fip-all: fip-dep
 	$(print_target)
 	${Q}echo "  [GEN] fip.bin"
 	${Q}. ${BUILD_PLAT}/blmacros.env && \
 	${FIPTOOL} -v genfip \
-		'${BUILD_PLAT}/fip.bin' \
+		'${FIP_PATH}' \
 		--MONITOR_RUNADDR="$${MONITOR_RUNADDR}" \
 		--BLCP_2ND_RUNADDR="$${BLCP_2ND_RUNADDR}" \
 		--CHIP_CONF='${CHIP_CONF_PATH}' \
 		--NOR_INFO='${NOR_INFO}' \
 		--NAND_INFO='${NAND_INFO}'\
-		--BL2='${BUILD_PLAT}/bl2.bin' \
+		--BL2='${BL2_PATH}' \
 		--BLCP_IMG_RUNADDR=${BLCP_IMG_RUNADDR} \
 		--BLCP_PARAM_LOADADDR=${BLCP_PARAM_LOADADDR} \
 		--BLCP=${BLCP_PATH} \
@@ -69,4 +72,4 @@ fip-all: fip-dep
 		--MONITOR='${MONITOR_PATH}' \
 		--LOADER_2ND='${LOADER_2ND_PATH}' \
 		--compress='${FIP_COMPRESS}'
-	${Q}echo "  [LS] " $$(ls -l '${BUILD_PLAT}/fip.bin')
+	${Q}echo "  [LS] " $$(ls -l '${FIP_PATH}')
