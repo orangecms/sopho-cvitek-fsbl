@@ -305,7 +305,7 @@ static void bulkOutCmpl(struct usb_ep *ep, struct usb_request *req)
 
 	case CVI_USB_KEEP_DL:
 		magic = crc16_ccitt(0, cmdBuf + HEADER_SIZE, length - HEADER_SIZE);
-		NOTICE("USBK.");
+		NOTICE("USBKKKKK.");
 		if (magic == 0xC283) {
 			ack_idx = 0;
 			flagEnterDL = 1;

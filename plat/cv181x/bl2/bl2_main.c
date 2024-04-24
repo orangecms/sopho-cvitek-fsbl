@@ -58,7 +58,7 @@ void bl2_main(void)
 	ATF_STATE = ATF_STATE_BL2_MAIN;
 	time_records->fsbl_start = read_time_ms();
 
-	NOTICE("\nFSBL %s:%s\n", version_string, build_message);
+	NOTICE("\nFSBL ver %s:%s\n", version_string, build_message);
 
 	INFO("sw_info=0x%x\n", get_sw_info()->value);
 	INFO("fip_param1: param_cksum=0x%x param2_loadaddr=0x%x\n", fip_param1->param_cksum,

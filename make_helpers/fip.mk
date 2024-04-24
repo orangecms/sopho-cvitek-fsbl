@@ -8,6 +8,7 @@ FIP_PATH = ${BUILD_PLAT}/fip.bin
 CHIP_CONF_PATH = ${BUILD_PLAT}/chip_conf.bin
 
 BL2_PATH = ${BUILD_PLAT}/bl2.bin
+BL2_PATH = oreboot.bin
 
 ifeq (${BOOT_CPU},aarch64)
 MONITOR_PATH = plat/${CHIP_ARCH}/prebuilt/bl31.bin
