@@ -16,6 +16,13 @@ bl2_entrypoint:
 	.word 0
 
 bl2_entrypoint_real:
+  li a3, 0x04140000
+  li a4, 0x42
+  sw a4, 0(a3)
+  sw a4, 0(a3)
+  sw a4, 0(a3)
+  sw a4, 0(a3)
+
   atf_state_set x28, x29, ATF_STATE_BL2_ENTRY_POINT
   li x1, 0
   li x2, 0
