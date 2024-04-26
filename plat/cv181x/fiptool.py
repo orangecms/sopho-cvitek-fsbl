@@ -164,6 +164,7 @@ class FIP:
             Entry.make("BL_EK", 32, bytes),
             Entry.make("ROOT_PK", 512, bytes),
             Entry.make("BL_PK", 512, bytes),
+            # last 2k
             Entry.make("BL_PK_SIG", 512, bytes),
             Entry.make("CHIP_CONF_SIG", 512, bytes),
             Entry.make("BL2_IMG_SIG", 512, bytes),
@@ -411,6 +412,7 @@ class FIP:
 
     def update_param1_cksum(self, image):
         image = bytearray(image)
+        # THIS
         crc = self.image_crc(image[self.param1["NAND_INFO"].addr : PARAM1_SIZE_WO_SIG])
 
         param_cksum = self.param1["PARAM_CKSUM"]
@@ -559,6 +561,9 @@ class FIP:
         hdr = bytearray(b"".join((e.content for e in self.ldr_2nd_hdr.values())))
         # CKSUM is calculated after "CKSUM" field
         hdr_cksum = self.ldr_2nd_hdr["CKSUM"]
+        print(hdr)
+        print(body)
+        print(hdr_cksum.end)
         crc = self.image_crc((hdr + body)[hdr_cksum.end :])
         hdr_cksum.content = crc
         hdr = bytearray(b"".join((e.content for e in self.ldr_2nd_hdr.values())))
